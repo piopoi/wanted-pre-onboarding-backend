@@ -35,3 +35,18 @@ include::{snippets}/recruit/search/query-parameters.adoc[]
 === 응답
 include::{snippets}/recruit/search/http-response.adoc[]
 include::{snippets}/recruit/search/response-fields.adoc[]
+
+== 채용공고 전체 조회
+=== 요청
+include::{snippets}/recruit/getAll/http-request.adoc[]
+=== 응답
+include::{snippets}/recruit/getAll/http-response.adoc[]
+include::{snippets}/recruit/getAll/response-fields.adoc[]
+
+== 채용공고 단건 상세 조회
+=== 요청
+include::{snippets}/recruit/get/http-request.adoc[]
+include::{snippets}/recruit/get/path-parameters.adoc[]
+=== 응답
+include::{snippets}/recruit/get/http-response.adoc[]
+include::{snippets}/recruit/get/response-fields.adoc[]

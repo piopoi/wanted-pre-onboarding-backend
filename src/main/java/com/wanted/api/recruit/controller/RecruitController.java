@@ -32,9 +32,15 @@ public class RecruitController {
         return ResponseEntity.created(URI.create("/api/recruit" + recruitId)).build();
     }
 
-    @GetMapping("/api/recruits")
+    @GetMapping("/api/recruits/search")
     public ResponseEntity<List<RecruitGetResponse>> searchRecruit(@RequestParam String keyword) {
         List<RecruitGetResponse> recruitGetResponses = recruitService.searchRecruit(keyword);
+        return ResponseEntity.ok(recruitGetResponses);
+    }
+
+    @GetMapping("/api/recruits")
+    public ResponseEntity<List<RecruitGetResponse>> getAllRecruits() {
+        List<RecruitGetResponse> recruitGetResponses = recruitService.getAllRecruits();
         return ResponseEntity.ok(recruitGetResponses);
     }
 

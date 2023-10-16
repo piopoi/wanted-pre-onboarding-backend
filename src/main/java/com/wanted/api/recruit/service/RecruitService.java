@@ -47,6 +47,14 @@ public class RecruitService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<RecruitGetResponse> getAllRecruits() {
+        List<Recruit> recruits = recruitRepository.findAll();
+        return recruits.stream()
+                .map(RecruitGetResponse::from)
+                .toList();
+    }
+
     @Transactional
     public void updateRecruit(Long recruitId, RecruitUpdateRequest request) {
         Recruit recruit = findRecruitById(recruitId);

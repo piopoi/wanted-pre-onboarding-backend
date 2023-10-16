@@ -471,6 +471,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_응답_4">응답</a></li>
 </ul>
 </li>
+<li><a href="#_채용공고_전체_조회">채용공고 전체 조회</a>
+<ul class="sectlevel2">
+<li><a href="#_요청_5">요청</a></li>
+<li><a href="#_응답_5">응답</a></li>
+</ul>
+</li>
+<li><a href="#_채용공고_단건_상세_조회">채용공고 단건 상세 조회</a>
+<ul class="sectlevel2">
+<li><a href="#_요청_6">요청</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -551,7 +562,7 @@ Host: localhost:8080
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
-Location: /api/recruit11</code></pre>
+Location: /api/recruit5</code></pre>
 </div>
 </div>
 </div>
@@ -698,7 +709,7 @@ Host: localhost:8080</code></pre>
 <h3 id="_요청_4"><a class="link" href="#_요청_4">요청</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/recruits?keyword=keyword HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/recruits/search?keyword=keyword HTTP/1.1
 Accept: application/json
 Host: localhost:8080</code></pre>
 </div>
@@ -787,11 +798,104 @@ Content-Length: 313
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_채용공고_전체_조회"><a class="link" href="#_채용공고_전체_조회">채용공고 전체 조회</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_요청_5"><a class="link" href="#_요청_5">요청</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/recruits HTTP/1.1
+Accept: application/json
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_응답_5"><a class="link" href="#_응답_5">응답</a></h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Content-Length: 689
+
+[{"recruitId":1,"companyName":"원티드랩","country":"한국","city":"서울","position":"백엔드 주니어 개발자","reward":1500000,"skill":"Python, Java"},{"recruitId":2,"companyName":"원티드코리아","country":"한국","city":"부산","position":"프론트엔드 개발자","reward":500000,"skill":"React"},{"recruitId":3,"companyName":"네이버","country":"한국","city":"판교","position":"네이버 검색 서비스 백엔드 개발자","reward":300000,"skill":"java spring jpa"},{"recruitId":4,"companyName":"카카오","country":"한국","city":"판교","position":"카카오 선물하기팀 백엔드 개발자","reward":200000,"skill":"java spring mybatis oracle"}]</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].recruitId</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">채용공고 아이디</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].companyName</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">채용 회사명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].country</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">국가</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].city</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">지역(도시)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].position</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">채용 포지션</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].reward</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">채용 보상금</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>[].skill</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">사용 기술</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_채용공고_단건_상세_조회"><a class="link" href="#_채용공고_단건_상세_조회">채용공고 단건 상세 조회</a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_요청_6"><a class="link" href="#_요청_6">요청</a></h3>
+<div class="paragraph">
+<p>Unresolved directive in index.adoc - include::/Users/piopoi/workspace/wanted/wanted-pre-onboarding-backend/build/generated-snippets/recruit/get/http-request.adoc[]
+Unresolved directive in index.adoc - include::/Users/piopoi/workspace/wanted/wanted-pre-onboarding-backend/build/generated-snippets/recruit/get/path-parameters.adoc[]
+=== 응답
+Unresolved directive in index.adoc - include::/Users/piopoi/workspace/wanted/wanted-pre-onboarding-backend/build/generated-snippets/recruit/get/http-response.adoc[]
+Unresolved directive in index.adoc - include::/Users/piopoi/workspace/wanted/wanted-pre-onboarding-backend/build/generated-snippets/recruit/get/response-fields.adoc[]</p>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2023-10-16 23:23:21 +0900
+Last updated 2023-10-16 23:32:31 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

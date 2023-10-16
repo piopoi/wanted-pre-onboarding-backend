@@ -8,7 +8,6 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.restdocs.request.RequestDocumentation.queryParameters;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -75,7 +74,7 @@ public class RecruitControllerTest extends BaseControllerTest {
         addRecruit(3L, "백엔드 주니어 개발자", 100000L, "채용합니다. " + keyword, "Python");
 
         //when then
-        mockMvc.perform(RestDocumentationRequestBuilders.get(requestUri + "?keyword=" + keyword)
+        mockMvc.perform(RestDocumentationRequestBuilders.get(requestUri + "/search?keyword=" + keyword)
                         .accept(APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -84,6 +83,28 @@ public class RecruitControllerTest extends BaseControllerTest {
                         queryParameters(
                                 parameterWithName("keyword").description("검색 키워드")
                         ),
+                        responseFields(
+                                fieldWithPath("[].recruitId").description("채용공고 아이디"),
+                                fieldWithPath("[].companyName").description("채용 회사명"),
+                                fieldWithPath("[].country").description("국가"),
+                                fieldWithPath("[].city").description("지역(도시)"),
+                                fieldWithPath("[].position").description("채용 포지션"),
+                                fieldWithPath("[].reward").description("채용 보상금"),
+                                fieldWithPath("[].skill").description("사용 기술")
+                        ))
+                );
+    }
+
+    @Test
+    @DisplayName("채용공고 전체를 조회할 수 있다.")
+    void getAllRecruits() throws Exception {
+        //when then
+        mockMvc.perform(RestDocumentationRequestBuilders.get(requestUri)
+                        .accept(APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()").value(4))
+                .andDo(document("recruit/getAll",
                         responseFields(
                                 fieldWithPath("[].recruitId").description("채용공고 아이디"),
                                 fieldWithPath("[].companyName").description("채용 회사명"),
