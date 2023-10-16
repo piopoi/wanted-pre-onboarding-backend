@@ -5,3 +5,10 @@
 :toc: left
 :toclevels: 2
 :sectlinks:
+
+== 채용공고 등록
+=== 요청
+include::{snippets}/recruit/create/http-request.adoc[]
+include::{snippets}/recruit/create/request-fields.adoc[]
+=== 응답
+include::{snippets}/recruit/create/http-response.adoc[]
