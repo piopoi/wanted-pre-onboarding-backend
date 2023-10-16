@@ -3,6 +3,7 @@ package com.wanted.api.recruit.domain;
 import com.wanted.api.common.domain.BaseEntity;
 import com.wanted.api.company.domain.Company;
 import com.wanted.api.recruit.dto.RecruitCreateRequest;
+import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -65,5 +66,41 @@ public class Recruit extends BaseEntity {
                 .skill(recruitCreateRequest.getSkill())
                 .company(company)
                 .build();
+    }
+
+    public static Recruit of(String position, Long reward, String content, String skill) {
+        return Recruit.builder()
+                .position(position)
+                .reward(reward)
+                .content(content)
+                .skill(skill)
+                .build();
+    }
+
+    public void update(Recruit recruit) {
+        updatePosition(recruit.getPosition());
+        updateReward(recruit.getReward());
+        updateContent(recruit.getContent());
+        updateSkill(recruit.getSkill());
+    }
+
+    private void updatePosition(String position) {
+        if (!StringUtils.isBlank(position)) {
+            this.position = position;
+        }
+    }
+
+    private void updateReward(Long reward) {
+        this.reward = reward;
+    }
+
+    private void updateContent(String content) {
+        if (!StringUtils.isBlank(content)) {
+            this.content = content;
+        }
+    }
+
+    private void updateSkill(String skill) {
+        this.skill = skill;
     }
 }

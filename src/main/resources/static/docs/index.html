@@ -464,12 +464,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h3 id="_요청"><a class="link" href="#_요청">요청</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">POST /api/recruit HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">PATCH /api/recruits/3 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
-Content-Length: 123
+Content-Length: 125
 Host: localhost:8080
 
-{"companyId":1,"position":"팀장","reward":1000000,"content":"개발팀장 채용합니다.","skill":"spring boot, mysql"}</code></pre>
+{"position":"Django 백엔드 개발자","reward":500000,"content":"Django 백엔드 개발자","skill":"spring boot, mysql"}</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -490,13 +490,6 @@ Host: localhost:8080
 </tr>
 </thead>
 <tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">companyId</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Number</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">채용 회사 아이디</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">position</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
@@ -532,8 +525,7 @@ Host: localhost:8080
 <h3 id="_응답"><a class="link" href="#_응답">응답</a></h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 201 Created
-Location: /api/recruit1</code></pre>
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK</code></pre>
 </div>
 </div>
 </div>

@@ -170,7 +170,7 @@
 
 ## 구현 API
 - [x] 채용공고를 등록할 수 있다.
-- [ ] 채용공고를 수정할 수 있다.
+- [x] 채용공고를 수정할 수 있다.
 - [ ] 채용공고를 삭제할 수 있다.
 - [ ] 채용공고 목록을 조회할 수 있다.
 - [ ] 채용공고를 검색하여 목록을 조회할 수 있다. (선택사항)
@@ -181,6 +181,7 @@
   - [ ] 사용자 1명 당 채용공고 1건에만 지원 가능하다.
 
 ## API 명세
+<a href="src/main/resources/static/docs/index.html" target="_blank">API 명세</a>
 - file : [src/main/resources/static/docs/index.html](src/main/resources/static/docs/index.html)
 - app 실행 후 url: [http://localhost:8080/docs/index.html](http://localhost:8080/docs/index.html)
 
