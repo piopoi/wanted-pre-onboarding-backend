@@ -12,3 +12,18 @@ include::{snippets}/recruit/create/http-request.adoc[]
 include::{snippets}/recruit/create/request-fields.adoc[]
 === 응답
 include::{snippets}/recruit/create/http-response.adoc[]
+
+== 채용공고 수정
+=== 요청
+include::{snippets}/recruit/update/http-request.adoc[]
+include::{snippets}/recruit/update/path-parameters.adoc[]
+include::{snippets}/recruit/update/request-fields.adoc[]
+=== 응답
+include::{snippets}/recruit/update/http-response.adoc[]
+
+== 채용공고 삭제
+=== 요청
+include::{snippets}/recruit/delete/http-request.adoc[]
+include::{snippets}/recruit/delete/path-parameters.adoc[]
+=== 응답
+include::{snippets}/recruit/delete/http-response.adoc[]

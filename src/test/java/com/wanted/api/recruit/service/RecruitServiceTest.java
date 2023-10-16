@@ -3,6 +3,7 @@ package com.wanted.api.recruit.service;
 import static com.wanted.api.recruit.controller.RecruitControllerTest.createRecruitCreateRequest;
 import static com.wanted.api.recruit.controller.RecruitControllerTest.createRecruitUpdateRequest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.wanted.api.common.BaseTest;
 import com.wanted.api.recruit.domain.Recruit;
@@ -53,6 +54,17 @@ class RecruitServiceTest extends BaseTest {
         assertThat(updatedRecruit.getReward()).isEqualTo(request.getReward());
         assertThat(updatedRecruit.getSkill()).isEqualTo(request.getSkill());
         assertThat(updatedRecruit.getContent()).isEqualTo(request.getContent());
+    }
+
+    @Test
+    @DisplayName("채용공고를 삭제할 수 있다.")
+    void deleteRecruit() {
+        //when
+        recruitService.deleteRecruit(recruitId);
+
+        //then
+        assertThatThrownBy(() -> findRecruitById(recruitId))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     private Recruit findRecruitById(Long recruitId) {

@@ -8,6 +8,7 @@ import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,12 @@ public class RecruitController {
     public ResponseEntity<Void> updateRecruit(@PathVariable Long recruitId,
                                               @RequestBody RecruitUpdateRequest recruitUpdateRequest) {
         recruitService.updateRecruit(recruitId, recruitUpdateRequest);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/api/recruits/{recruitId}")
+    public ResponseEntity<Void> deleteRecruit(@PathVariable Long recruitId) {
+        recruitService.deleteRecruit(recruitId);
         return ResponseEntity.ok().build();
     }
 }

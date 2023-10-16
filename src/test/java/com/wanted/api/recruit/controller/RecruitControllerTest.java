@@ -61,7 +61,6 @@ public class RecruitControllerTest extends BaseControllerTest {
                                 fieldWithPath("skill").description("사용기술")
                         ))
                 );
-
     }
 
     @Test
@@ -76,7 +75,7 @@ public class RecruitControllerTest extends BaseControllerTest {
                         .content(objectMapper.writeValueAsString(request)))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("recruit/create",
+                .andDo(document("recruit/update",
                         pathParameters(
                                 parameterWithName("recruitId").description("채용공고 아이디")
                         ),
@@ -87,7 +86,20 @@ public class RecruitControllerTest extends BaseControllerTest {
                                 fieldWithPath("skill").description("사용기술")
                         ))
                 );
+    }
 
+    @Test
+    @DisplayName("채용공고를 삭제할 수 있다.")
+    void deleteRecruit() throws Exception {
+        //when then
+        mockMvc.perform(RestDocumentationRequestBuilders.delete(requestUri + "/{recruitId}", recruitId))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("recruit/delete",
+                        pathParameters(
+                                parameterWithName("recruitId").description("채용공고 아이디")
+                        ))
+                );
     }
 
     public static RecruitCreateRequest createRecruitCreateRequest() {

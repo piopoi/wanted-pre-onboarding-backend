@@ -33,6 +33,12 @@ public class RecruitService {
         recruit.update(request.toEntity());
     }
 
+    @Transactional
+    public void deleteRecruit(Long recruitId) {
+        findRecruitById(recruitId);
+        recruitRepository.deleteById(recruitId);
+    }
+
     @Transactional(readOnly = true)
     public Recruit findRecruitById(Long recruitId) {
         return recruitRepository.findById(recruitId)
