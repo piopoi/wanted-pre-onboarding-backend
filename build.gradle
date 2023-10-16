@@ -38,11 +38,15 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     //DB
+    runtimeOnly 'com.h2database:h2'
     runtimeOnly 'com.mysql:mysql-connector-j'
 
     //REST Docs
     asciidoctorExt "org.springframework.restdocs:spring-restdocs-asciidoctor:3.0.0"
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc:3.0.0'
+
+    //Test-DatabaseCleanUp
+    implementation 'com.google.guava:guava:32.1.2-jre'
 }
 
 tasks.named('test') {
@@ -73,12 +77,4 @@ task copyDocument(type: Copy) {
 //REST Docs
 build {
     dependsOn copyDocument
-}
-
-//REST Docs
-bootJar {
-    dependsOn asciidoctor
-    from("${asciidoctor.outputDir}") {
-        into 'static/docs'
-    }
 }
