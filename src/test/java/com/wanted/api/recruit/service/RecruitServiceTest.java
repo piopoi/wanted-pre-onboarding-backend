@@ -1,15 +1,17 @@
 package com.wanted.api.recruit.service;
 
-import static com.wanted.api.recruit.controller.RecruitControllerTest.createRecruitCreateRequest;
-import static com.wanted.api.recruit.controller.RecruitControllerTest.createRecruitUpdateRequest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.wanted.api.common.BaseTest;
+import com.wanted.api.company.domain.Company;
+import com.wanted.api.company.repository.CompanyRepository;
 import com.wanted.api.recruit.domain.Recruit;
 import com.wanted.api.recruit.dto.RecruitCreateRequest;
+import com.wanted.api.recruit.dto.RecruitGetResponse;
 import com.wanted.api.recruit.dto.RecruitUpdateRequest;
 import com.wanted.api.recruit.repository.RecruitRepository;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,29 +23,53 @@ class RecruitServiceTest extends BaseTest {
     private RecruitService recruitService;
     @Autowired
     private RecruitRepository recruitRepository;
-
-    private Long recruitId;
+    @Autowired
+    private CompanyRepository companyRepository;
 
     @BeforeEach
     void setUp() {
-        RecruitCreateRequest request = createRecruitCreateRequest();
-        recruitId = recruitService.createRecruit(request);
+        addRecruit(1L, "백엔드 주니어 개발자", 1500000L, "원티드랩에서 백엔드 주니어 개발자를 채용합니다.", "Python, Java");
+        addRecruit(2L, "프론트엔드 개발자", 500000L, "원티드코리아에서 프론트엔드 개발자를 환영합니다.", "React");
+        addRecruit(3L, "네이버 검색 서비스 백엔드 개발자", 300000L, "네이버 검색 서비스 담당자 채용합니다.", "java spring jpa");
+        addRecruit(4L, "카카오 선물하기팀 백엔드 개발자", 200000L, "카카오톡 선물하기 백엔드 구인합니다.", "java spring mybatis oracle");
     }
 
     @Test
     @DisplayName("채용공고를 등록할 수 있다.")
     void createRecruit() {
+        //given
+        RecruitCreateRequest request = new RecruitCreateRequest(1L, "포지션", 100L, "내용", "기술");
+
+        //when
+        Long createdRecruitId = recruitService.createRecruit(request);
+
         //then
-        Recruit findRecruit = findRecruitById(recruitId);
+        Recruit findRecruit = findRecruitById(createdRecruitId);
         assertThat(findRecruit).isNotNull();
-        assertThat(findRecruit.getId()).isEqualTo(recruitId);
+        assertThat(findRecruit.getId()).isEqualTo(createdRecruitId);
+    }
+
+    @Test
+    @DisplayName("채용공고를 검색하여 목록을 조회할 수 있다.")
+    void searchRecruit() {
+        //given
+        String keyword = "keyword";
+        addRecruit(4L, keyword + "백엔드 주니어 개발자", 1500000L, "백엔드 주니어 개발자를 채용합니다.", "Java");
+        addRecruit(3L, "백엔드 주니어 개발자", 100000L, "채용합니다. " + keyword, "Python");
+
+        //when
+        List<RecruitGetResponse> recruitGetResponses = recruitService.searchRecruit(keyword);
+
+        //then
+        assertThat(recruitGetResponses.size()).isEqualTo(2);
     }
 
     @Test
     @DisplayName("채용공고를 수정할 수 있다.")
     void updateRecruit() {
         //given
-        RecruitUpdateRequest request = createRecruitUpdateRequest();
+        Long recruitId = 1L;
+        RecruitUpdateRequest request = new RecruitUpdateRequest("포지션", 100L, "내용", "기술");
 
         //when
         recruitService.updateRecruit(recruitId, request);
@@ -59,6 +85,9 @@ class RecruitServiceTest extends BaseTest {
     @Test
     @DisplayName("채용공고를 삭제할 수 있다.")
     void deleteRecruit() {
+        //given
+        Long recruitId = 1L;
+
         //when
         recruitService.deleteRecruit(recruitId);
 
@@ -70,5 +99,12 @@ class RecruitServiceTest extends BaseTest {
     private Recruit findRecruitById(Long recruitId) {
         return recruitRepository.findById(recruitId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회사입니다."));
+    }
+
+    private void addRecruit(Long companyId, String position, Long reward, String content, String skill) {
+        RecruitCreateRequest request = new RecruitCreateRequest(companyId, position, reward, content, skill);
+        Company company = companyRepository.findById(companyId).orElseThrow();
+        Recruit recruit = Recruit.of(request, company);
+        recruitRepository.save(recruit);
     }
 }

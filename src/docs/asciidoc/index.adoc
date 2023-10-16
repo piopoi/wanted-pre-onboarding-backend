@@ -27,3 +27,11 @@ include::{snippets}/recruit/delete/http-request.adoc[]
 include::{snippets}/recruit/delete/path-parameters.adoc[]
 === 응답
 include::{snippets}/recruit/delete/http-response.adoc[]
+
+== 채용공고 검색
+=== 요청
+include::{snippets}/recruit/search/http-request.adoc[]
+include::{snippets}/recruit/search/query-parameters.adoc[]
+=== 응답
+include::{snippets}/recruit/search/http-response.adoc[]
+include::{snippets}/recruit/search/response-fields.adoc[]

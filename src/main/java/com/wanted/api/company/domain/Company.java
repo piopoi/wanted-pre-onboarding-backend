@@ -11,11 +11,13 @@ import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Entity
+@Getter
 @ToString
 @EqualsAndHashCode(of = {"id"}, callSuper = false)
 public class Company extends BaseEntity {
