@@ -1,6 +1,7 @@
 package com.wanted.api.recruit.dto;
 
 import com.wanted.api.recruit.domain.Recruit;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -18,8 +19,9 @@ public class RecruitGetDetailResponse {
     private final Long reward;
     private final String skill;
     private final String content;
+    private final List<Long> otherRecruitIds;
 
-    public static RecruitGetDetailResponse from(Recruit recruit) {
+    public static RecruitGetDetailResponse from(Recruit recruit, List<Long> otherRecruitIds) {
         return RecruitGetDetailResponse.builder()
                 .recruitId(recruit.getId())
                 .companyName(recruit.getCompany().getName())
@@ -29,6 +31,7 @@ public class RecruitGetDetailResponse {
                 .reward(recruit.getReward())
                 .skill(recruit.getSkill())
                 .content(recruit.getContent())
+                .otherRecruitIds(otherRecruitIds)
                 .build();
     }
 }

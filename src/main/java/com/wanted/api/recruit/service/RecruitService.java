@@ -60,7 +60,9 @@ public class RecruitService {
     public RecruitGetDetailResponse getRecruit(Long recruitId) {
         Recruit recruit = recruitRepository.findById(recruitId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 채용공고입니다."));
-        return RecruitGetDetailResponse.from(recruit);
+        Long companyId = recruit.getCompany().getId();
+        List<Long> otherRecruitIds = recruitRepository.findIdsByCompanyId(companyId);
+        return RecruitGetDetailResponse.from(recruit, otherRecruitIds);
     }
 
     @Transactional

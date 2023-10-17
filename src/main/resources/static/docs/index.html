@@ -915,9 +915,9 @@ Host: localhost:8080</code></pre>
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
-Content-Length: 243
+Content-Length: 269
 
-{"recruitId":1,"companyName":"원티드랩","country":"한국","city":"서울","position":"백엔드 주니어 개발자","reward":1500000,"skill":"Python, Java","content":"원티드랩에서 백엔드 주니어 개발자를 채용합니다."}</code></pre>
+{"recruitId":1,"companyName":"원티드랩","country":"한국","city":"서울","position":"백엔드 주니어 개발자","reward":1500000,"skill":"Python, Java","content":"원티드랩에서 백엔드 주니어 개발자를 채용합니다.","otherRecruitIds":[1,2,3]}</code></pre>
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -973,6 +973,11 @@ Content-Length: 243
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>content</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">채용 내용</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>otherRecruitIds</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">같은 회사가 등록한 다른 채용공고 id 리스트</p></td>
 </tr>
 </tbody>
 </table>

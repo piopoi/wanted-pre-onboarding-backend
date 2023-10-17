@@ -77,6 +77,8 @@ class RecruitServiceTest extends BaseTest {
     void getRecruit() {
         //given
         Long recruitId = addRecruit(1L, "백엔드 주니어 개발자", 1500000L, "원티드랩에서 백엔드 주니어 개발자를 채용합니다.", "Python, Java");
+        addRecruit(1L, "백엔드 주니어 개발자2", 1500000L, "원티드랩에서 백엔드 주니어 개발자를 채용합니다.", "Python, Java");
+        addRecruit(1L, "백엔드 주니어 개발자3", 1500000L, "원티드랩에서 백엔드 주니어 개발자를 채용합니다.", "Python, Java");
 
         //when
         RecruitGetDetailResponse recruitGetDetailResponse = recruitService.getRecruit(recruitId);
@@ -87,6 +89,7 @@ class RecruitServiceTest extends BaseTest {
         assertThat(recruitGetDetailResponse.getPosition()).isEqualTo("백엔드 주니어 개발자");
         assertThat(recruitGetDetailResponse.getReward()).isEqualTo(1500000L);
         assertThat(recruitGetDetailResponse.getCompanyName()).isEqualTo("원티드랩");
+        assertThat(recruitGetDetailResponse.getOtherRecruitIds().size()).isEqualTo(3);
     }
 
     @Test

@@ -121,6 +121,8 @@ public class RecruitControllerTest extends BaseControllerTest {
     void getRecruit() throws Exception {
         //given
         Long recruitId = addRecruit(1L, "백엔드 주니어 개발자", 1500000L, "원티드랩에서 백엔드 주니어 개발자를 채용합니다.", "Python, Java");
+        addRecruit(1L, "백엔드 주니어 개발자2", 1500000L, "원티드랩에서 백엔드 주니어 개발자를 채용합니다.", "Python, Java");
+        addRecruit(1L, "백엔드 주니어 개발자3", 1500000L, "원티드랩에서 백엔드 주니어 개발자를 채용합니다.", "Python, Java");
 
         //when then
         mockMvc.perform(RestDocumentationRequestBuilders.get(requestUri + "/{recruitId}", recruitId)
@@ -139,7 +141,8 @@ public class RecruitControllerTest extends BaseControllerTest {
                                 fieldWithPath("position").description("채용 포지션"),
                                 fieldWithPath("reward").description("채용 보상금"),
                                 fieldWithPath("skill").description("사용 기술"),
-                                fieldWithPath("content").description("채용 내용")
+                                fieldWithPath("content").description("채용 내용"),
+                                fieldWithPath("otherRecruitIds").description("같은 회사가 등록한 다른 채용공고 id 리스트")
                         ))
                 );
     }
