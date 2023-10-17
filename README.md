@@ -184,9 +184,8 @@
   - [x] 사용자는 채용공고 1개에 1번만 지원할 수 있다.
 
 ## API 명세
-<a href="src/main/resources/static/docs/index.html" target="_blank">API 명세</a>
-- file : [src/main/resources/static/docs/index.html](src/main/resources/static/docs/index.html)
-- app 실행 후 url: [http://localhost:8080/docs/index.html](http://localhost:8080/docs/index.html)
+- 바로보기 링크: [https://piopoi.github.io/wanted-api-docs.html](https://piopoi.github.io/wanted-api-docs.html)
+- html file : [src/main/resources/static/docs/index.html](src/main/resources/static/docs/index.html)
 
 ## 사용기술
 - Spring Boot 3.1.4
