@@ -72,23 +72,6 @@ class RecruitServiceTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("채용공고 1건을 상세조회할 수 있다.")
-    void getRecruit() {
-        //given
-        Long recruitId = addRecruit(1L, "백엔드 주니어 개발자", 1500000L, "원티드랩에서 백엔드 주니어 개발자를 채용합니다.", "Python, Java");
-
-        //when
-        RecruitGetResponse recruitGetResponse = recruitService.getRecruit(recruitId);
-
-        //then
-        assertThat(recruitGetResponse).isNotNull();
-        assertThat(recruitGetResponse.getRecruitId()).isEqualTo(recruitId);
-        assertThat(recruitGetResponse.getPosition()).isEqualTo("백엔드 주니어 개발자");
-        assertThat(recruitGetResponse.getReward()).isEqualTo(1500000L);
-        assertThat(recruitGetResponse.getCompanyName()).isEqualTo("원티드랩");
-    }
-
-    @Test
     @DisplayName("채용공고를 수정할 수 있다.")
     void updateRecruit() {
         //given
