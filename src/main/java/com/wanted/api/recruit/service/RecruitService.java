@@ -55,6 +55,13 @@ public class RecruitService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public RecruitGetResponse getRecruit(Long recruitId) {
+        Recruit recruit = recruitRepository.findById(recruitId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 채용공고입니다."));
+        return RecruitGetResponse.from(recruit);
+    }
+
     @Transactional
     public void updateRecruit(Long recruitId, RecruitUpdateRequest request) {
         Recruit recruit = findRecruitById(recruitId);

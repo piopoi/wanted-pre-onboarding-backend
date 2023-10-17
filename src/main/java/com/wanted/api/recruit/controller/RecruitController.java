@@ -44,6 +44,12 @@ public class RecruitController {
         return ResponseEntity.ok(recruitGetResponses);
     }
 
+    @GetMapping("/api/recruits/{recruitId}")
+    public ResponseEntity<RecruitGetResponse> getRecruit(@PathVariable Long recruitId) {
+        RecruitGetResponse recruitGetResponse = recruitService.getRecruit(recruitId);
+        return ResponseEntity.ok(recruitGetResponse);
+    }
+
     @PatchMapping("/api/recruits/{recruitId}")
     public ResponseEntity<Void> updateRecruit(@PathVariable Long recruitId,
                                               @RequestBody RecruitUpdateRequest recruitUpdateRequest) {
