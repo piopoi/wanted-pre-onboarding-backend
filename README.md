@@ -148,7 +148,7 @@
 
 ## 필수 기술요건
 - ORM
-- RDBMS: MySQL 8.1.0
+- RDBMS
 
 ## 참고사항
 - Unit Test 구현
@@ -191,7 +191,6 @@
 
 ## 데이터베이스 테이블 구조
 <img src="docs/db_diagram.png" width="500"/>
-<br>
 
 ## 사용기술
 - Spring Boot 3.1.4
