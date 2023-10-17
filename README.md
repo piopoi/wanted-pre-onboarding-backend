@@ -166,6 +166,8 @@
   - 회사/사용자 등록 절차
   - 사용자 인증절차: 로그인, 토큰 등
 
+<br>
+
 # 2. 구현
 
 ## 구현 API
@@ -187,9 +189,12 @@
 - 바로보기 링크: [https://piopoi.github.io/wanted-api-docs.html](https://piopoi.github.io/wanted-api-docs.html)
 - html file : [src/main/resources/static/docs/index.html](src/main/resources/static/docs/index.html)
 
+## 데이터베이스 테이블 구조
+<img src="docs/db_diagram.png" width="500"/>
+<br>
+
 ## 사용기술
 - Spring Boot 3.1.4
 - MySQL 8.1.0
 - Spring REST Docs 3.0.0
 
-## 데이터베이스 테이블 구조
