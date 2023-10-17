@@ -111,7 +111,7 @@ public class Recruit extends BaseEntity {
     }
 
     private void updateSkill(String skill) {
-        if (!StringUtils.isBlank(content)) {
+        if (!StringUtils.isBlank(skill)) {
             this.skill = skill;
         }
     }
