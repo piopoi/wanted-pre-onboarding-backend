@@ -8,6 +8,7 @@ import com.wanted.api.company.domain.Company;
 import com.wanted.api.company.repository.CompanyRepository;
 import com.wanted.api.recruit.domain.Recruit;
 import com.wanted.api.recruit.dto.RecruitCreateRequest;
+import com.wanted.api.recruit.dto.RecruitGetDetailResponse;
 import com.wanted.api.recruit.dto.RecruitGetResponse;
 import com.wanted.api.recruit.dto.RecruitUpdateRequest;
 import com.wanted.api.recruit.repository.RecruitRepository;
@@ -69,6 +70,23 @@ class RecruitServiceTest extends BaseTest {
 
         //then
         assertThat(recruitGetResponses.size()).isEqualTo(4);
+    }
+
+    @Test
+    @DisplayName("채용공고 1건을 상세조회할 수 있다.")
+    void getRecruit() {
+        //given
+        Long recruitId = addRecruit(1L, "백엔드 주니어 개발자", 1500000L, "원티드랩에서 백엔드 주니어 개발자를 채용합니다.", "Python, Java");
+
+        //when
+        RecruitGetDetailResponse recruitGetDetailResponse = recruitService.getRecruit(recruitId);
+
+        //then
+        assertThat(recruitGetDetailResponse).isNotNull();
+        assertThat(recruitGetDetailResponse.getRecruitId()).isEqualTo(recruitId);
+        assertThat(recruitGetDetailResponse.getPosition()).isEqualTo("백엔드 주니어 개발자");
+        assertThat(recruitGetDetailResponse.getReward()).isEqualTo(1500000L);
+        assertThat(recruitGetDetailResponse.getCompanyName()).isEqualTo("원티드랩");
     }
 
     @Test

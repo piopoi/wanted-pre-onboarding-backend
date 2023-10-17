@@ -1,6 +1,7 @@
 package com.wanted.api.recruit.controller;
 
 import com.wanted.api.recruit.dto.RecruitCreateRequest;
+import com.wanted.api.recruit.dto.RecruitGetDetailResponse;
 import com.wanted.api.recruit.dto.RecruitGetResponse;
 import com.wanted.api.recruit.dto.RecruitUpdateRequest;
 import com.wanted.api.recruit.service.RecruitService;
@@ -42,6 +43,12 @@ public class RecruitController {
     public ResponseEntity<List<RecruitGetResponse>> getAllRecruits() {
         List<RecruitGetResponse> recruitGetResponses = recruitService.getAllRecruits();
         return ResponseEntity.ok(recruitGetResponses);
+    }
+
+    @GetMapping("/api/recruits/{recruitId}")
+    public ResponseEntity<RecruitGetDetailResponse> getRecruit(@PathVariable Long recruitId) {
+        RecruitGetDetailResponse recruitGetDetailResponse = recruitService.getRecruit(recruitId);
+        return ResponseEntity.ok(recruitGetDetailResponse);
     }
 
     @PatchMapping("/api/recruits/{recruitId}")

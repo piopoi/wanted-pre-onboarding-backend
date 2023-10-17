@@ -4,6 +4,7 @@ import com.wanted.api.company.domain.Company;
 import com.wanted.api.company.repository.CompanyRepository;
 import com.wanted.api.recruit.domain.Recruit;
 import com.wanted.api.recruit.dto.RecruitCreateRequest;
+import com.wanted.api.recruit.dto.RecruitGetDetailResponse;
 import com.wanted.api.recruit.dto.RecruitGetResponse;
 import com.wanted.api.recruit.dto.RecruitUpdateRequest;
 import com.wanted.api.recruit.repository.RecruitRepository;
@@ -53,6 +54,13 @@ public class RecruitService {
         return recruits.stream()
                 .map(RecruitGetResponse::from)
                 .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public RecruitGetDetailResponse getRecruit(Long recruitId) {
+        Recruit recruit = recruitRepository.findById(recruitId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 채용공고입니다."));
+        return RecruitGetDetailResponse.from(recruit);
     }
 
     @Transactional
