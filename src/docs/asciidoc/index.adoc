@@ -50,3 +50,10 @@ include::{snippets}/recruit/get/path-parameters.adoc[]
 === 응답
 include::{snippets}/recruit/get/http-response.adoc[]
 include::{snippets}/recruit/get/response-fields.adoc[]
+
+== 입사지원
+=== 요청
+include::{snippets}/application/create/http-request.adoc[]
+include::{snippets}/application/create/path-parameters.adoc[]
+=== 응답
+include::{snippets}/application/create/http-response.adoc[]

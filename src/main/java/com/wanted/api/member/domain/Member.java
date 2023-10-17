@@ -1,22 +1,26 @@
 package com.wanted.api.member.domain;
 
+import com.wanted.api.application.domain.Application;
 import com.wanted.api.common.domain.BaseEntity;
-import com.wanted.api.recruit.domain.Recruit;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Entity
+@Getter
 @ToString
-@EqualsAndHashCode(of = {"id"}, callSuper = false)
+@EqualsAndHashCode(callSuper = false)
 public class Member extends BaseEntity {
 
     @Id
@@ -26,6 +30,6 @@ public class Member extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Recruit recruit;
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Application> applications = new ArrayList<>();
 }

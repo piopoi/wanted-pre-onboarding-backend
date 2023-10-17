@@ -103,7 +103,7 @@ public class RecruitService {
         return entityManager.createQuery(query).getResultList();
     }
 
-    private Recruit findRecruitById(Long recruitId) {
+    public Recruit findRecruitById(Long recruitId) {
         return recruitRepository.findById(recruitId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 채용공고입니다."));
     }

@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.wanted.api.common.BaseTest;
-import com.wanted.api.company.domain.Company;
-import com.wanted.api.company.repository.CompanyRepository;
 import com.wanted.api.recruit.domain.Recruit;
 import com.wanted.api.recruit.dto.RecruitCreateRequest;
 import com.wanted.api.recruit.dto.RecruitGetDetailResponse;
@@ -23,8 +21,6 @@ class RecruitServiceTest extends BaseTest {
     private RecruitService recruitService;
     @Autowired
     private RecruitRepository recruitRepository;
-    @Autowired
-    private CompanyRepository companyRepository;
 
     @Test
     @DisplayName("채용공고를 등록할 수 있다.")
@@ -127,12 +123,5 @@ class RecruitServiceTest extends BaseTest {
     private Recruit findRecruitById(Long recruitId) {
         return recruitRepository.findById(recruitId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 회사입니다."));
-    }
-
-    private Long addRecruit(Long companyId, String position, Long reward, String content, String skill) {
-        RecruitCreateRequest request = new RecruitCreateRequest(companyId, position, reward, content, skill);
-        Company company = companyRepository.findById(companyId).orElseThrow();
-        Recruit recruit = Recruit.of(request, company);
-        return recruitRepository.save(recruit).getId();
     }
 }

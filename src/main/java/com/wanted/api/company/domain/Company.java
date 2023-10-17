@@ -2,6 +2,7 @@ package com.wanted.api.company.domain;
 
 import com.wanted.api.common.domain.BaseEntity;
 import com.wanted.api.recruit.domain.Recruit;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Entity
 @Getter
 @ToString
-@EqualsAndHashCode(of = {"id"}, callSuper = false)
+@EqualsAndHashCode(callSuper = false)
 public class Company extends BaseEntity {
 
     @Id
@@ -35,7 +36,7 @@ public class Company extends BaseEntity {
     @Column(nullable = false)
     private String city;
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Recruit> recruits = new ArrayList<>();
 
     protected Company() {

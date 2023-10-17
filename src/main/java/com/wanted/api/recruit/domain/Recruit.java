@@ -2,8 +2,10 @@ package com.wanted.api.recruit.domain;
 
 import com.wanted.api.common.domain.BaseEntity;
 import com.wanted.api.company.domain.Company;
+import com.wanted.api.application.domain.Application;
 import com.wanted.api.recruit.dto.RecruitCreateRequest;
 import io.micrometer.common.util.StringUtils;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -12,6 +14,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -23,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @Entity
 @Getter
 @ToString
-@EqualsAndHashCode(of = {"id"}, callSuper = false)
+@EqualsAndHashCode(callSuper = false)
 public class Recruit extends BaseEntity {
 
     @Id
@@ -43,8 +48,11 @@ public class Recruit extends BaseEntity {
     private String skill;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "company_id", nullable = false)
     private Company company;
+
+    @OneToMany(mappedBy = "recruit", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Application> applications = new ArrayList<>();
 
     protected Recruit() {
     }
@@ -91,7 +99,9 @@ public class Recruit extends BaseEntity {
     }
 
     private void updateReward(Long reward) {
-        this.reward = reward;
+        if (reward != null && reward >= 0) {
+            this.reward = reward;
+        }
     }
 
     private void updateContent(String content) {
@@ -101,6 +111,8 @@ public class Recruit extends BaseEntity {
     }
 
     private void updateSkill(String skill) {
-        this.skill = skill;
+        if (!StringUtils.isBlank(content)) {
+            this.skill = skill;
+        }
     }
 }

@@ -13,25 +13,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.wanted.api.common.BaseControllerTest;
-import com.wanted.api.company.domain.Company;
-import com.wanted.api.company.repository.CompanyRepository;
-import com.wanted.api.recruit.domain.Recruit;
 import com.wanted.api.recruit.dto.RecruitCreateRequest;
 import com.wanted.api.recruit.dto.RecruitUpdateRequest;
-import com.wanted.api.recruit.repository.RecruitRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
 public class RecruitControllerTest extends BaseControllerTest {
 
     private final String requestUri = "/api/recruits";
-
-    @Autowired
-    private CompanyRepository companyRepository;
-    @Autowired
-    private RecruitRepository recruitRepository;
 
     @Test
     @DisplayName("채용공고를 등록할 수 있다.")
@@ -188,12 +178,5 @@ public class RecruitControllerTest extends BaseControllerTest {
                                 parameterWithName("recruitId").description("채용공고 아이디")
                         ))
                 );
-    }
-
-    private Long addRecruit(Long companyId, String position, Long reward, String content, String skill) {
-        RecruitCreateRequest request = new RecruitCreateRequest(companyId, position, reward, content, skill);
-        Company company = companyRepository.findById(companyId).orElseThrow();
-        Recruit recruit = Recruit.of(request, company);
-        return recruitRepository.save(recruit).getId();
     }
 }
